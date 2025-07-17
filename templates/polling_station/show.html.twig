@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Bureau de Vote{% endblock %}
+
+{% block content %}
+<div class="crud-prefix-container">
+    <h1 class="crud-prefix-title">Détails du Bureau de Vote</h1>
+    <table class="crud-prefix-table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ polling_station.id }}</td>
+            </tr>
+            <tr>
+                <th>Poste</th>
+                <td>{{ polling_station.position.value }}</td>
+            </tr>
+            <tr>
+                <th>Ouvert</th>
+                <td>{{ polling_station.isOpen ? 'Oui' : 'Non' }}</td>
+            </tr>
+            <tr>
+                <th>Résultats Publiés</th>
+                <td>{{ polling_station.isResultPublished ? 'Oui' : 'Non' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="crud-prefix-btn-group">
+        <a href="{{ path('app_polling_station_index') }}" class="crud-prefix-btn crud-prefix-btn-view" title="Retour à la liste">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="{{ path('app_polling_station_edit', {'id': polling_station.id}) }}" class="crud-prefix-btn crud-prefix-btn-edit" title="Modifier">
+            <i class="fas fa-edit"></i>
+        </a>
+        {{ include('polling_station/_delete_form.html.twig', {'polling_station': polling_station}) }}
+    </div> 
+</div>
+{% endblock %}

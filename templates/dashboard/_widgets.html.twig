@@ -1,0 +1,60 @@
+{% macro dashboard_card(title, icon, stat, actions) %}
+<div class="dashboard-card">
+    <div class="card-header">
+        <h3>{{ title }}</h3>
+        <i class="{{ icon }}"></i>
+    </div>
+    <div class="stat-number">{{ stat }}</div>
+    <div class="quick-actions">
+        {% for action in actions %}
+            {% if action.route is not null %}
+                <div class="quick-action" onclick="window.location.href='{{ path(action.route) }}'">
+                    {{ action.label }}
+                </div>
+            {% else %}
+                <div class="quick-action disabled" style="opacity: 0.5; cursor: not-allowed;">
+                    {{ action.label }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro compact_results_card(title, leaders, viewAllRoute) %}
+<div class="dashboard-card compact-results-card">
+    <div class="card-header">
+        <h3>{{ title }}</h3>
+        <i class="fas fa-poll"></i>
+    </div>
+
+    <div class="compact-results-list">
+        {% for position, leader in leaders|slice(0, 4) %}
+            {% if leader %}
+                <div class="compact-result-row">
+                    <div class="result-position">
+                        <i class="fas fa-vote-yea"></i> {{ position }}
+                    </div>
+                    <div class="result-candidate">
+                        <strong>{{ leader.name }}</strong>
+                        <div class="compact-progress-bar">
+                            <div class="compact-progress-fill" style="width: {{ leader.percentage }}%;"></div>
+                        </div>
+                        <span class="percentage">{{ leader.percentage|round(1) }}%</span>
+                        <span class="votes">({{ leader.votes }} votes)</span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="compact-result-row empty">
+                    <em>Pas de candidats pour le poste de {{ position }}</em>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="view-all-container">
+        <a href="{{ path(viewAllRoute) }}" class="quick-action">Voir tout</a>
+    </div>
+</div>
+{% endmacro %}
+

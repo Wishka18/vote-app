@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats des élections{% endblock %}
+
+{% block content %}
+<div class="results-page">
+    <h2>Résultats des élections</h2>
+
+    <!-- Desktop View -->
+    <div class="results-desktop">
+        <aside class="results-sidebar">
+            <ul>
+                {% set uniquePositions = [] %}
+                {% for item in results %}
+                    {% if item.position not in uniquePositions %}
+                        {% set uniquePositions = uniquePositions|merge([item.position]) %}
+                    {% endif %}
+                {% endfor %}
+                {% for position in uniquePositions %}
+                    <li class="position-tab" data-position="{{ position }}">
+                        {{ position }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <section class="position-results">
+            {% for item in results %}
+                <div class="position-block" data-position="{{ item.position }}">
+                    <h3>{{ item.position }}</h3>
+                    {% if item.candidates is not empty %}
+                        {% set total_votes = item.candidates|map(row => row.votes)|reduce((carry, v) => carry + v, 0) %}
+                        <div class="candidates-list">
+                            {% for row in item.candidates %}
+                                {% set percentage = total_votes > 0 ? ((row.votes / total_votes) * 100)|round(1) : 0 %}
+                                <div class="candidate-card">
+                                    <img src="{{ asset('uploads/photos/' ~ row.candidate.photo) }}"
+                                         alt="{{ row.candidate.name }}"
+                                         class="candidate-photo">
+                                    <div class="candidate-info">
+                                        <div class="candidate-name">{{ row.candidate.name }}</div>
+                                        <div class="progress-bar-container">
+                                            <div class="progress-bar" style="width: {{ percentage }}%;"></div>
+                                            <span class="percentage">{{ percentage }}%</span>
+                                        </div>
+                                        <div class="vote-count">{{ row.votes }} votes</div>
+                                        {% if loop.first and row.votes > 0 %}
+                                            <div class="winner-badge">
+                                                <i class="fas fa-crown"></i>
+                                                Élu
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>Aucun candidat pour ce poste.</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+
+    <!-- Mobile View -->
+    <div class="results-mobile">
+        <div class="position-dropdown">
+            <select id="resultPositionDropdown">
+                {% set mobilePositions = [] %}
+                {% for item in results %}
+                    {% if item.position not in mobilePositions %}
+                        <option value="{{ item.position }}">{{ item.position }}</option>
+                        {% set mobilePositions = mobilePositions|merge([item.position]) %}
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <section class="position-results-mobile">
+            {% for item in results %}
+                <div class="position-block" data-position="{{ item.position }}">
+                    <h3>{{ item.position }}</h3>
+                    {% if item.candidates is not empty %}
+                        {% set total_votes = item.candidates|map(row => row.votes)|reduce((carry, v) => carry + v, 0) %}
+                        <div class="candidates-list">
+                            {% for row in item.candidates %}
+                                {% set percentage = total_votes > 0 ? ((row.votes / total_votes) * 100)|round(1) : 0 %}
+                                <div class="candidate-card">
+                                    <img src="{{ asset('uploads/photos/' ~ row.candidate.photo) }}"
+                                         alt="{{ row.candidate.name }}"
+                                         class="candidate-photo">
+                                    <div class="candidate-info">
+                                        <div class="candidate-name">{{ row.candidate.name }}</div>
+                                        <div class="progress-bar-container">
+                                            <div class="progress-bar" style="width: {{ percentage }}%;"></div>
+                                            <span class="percentage">{{ percentage }}%</span>
+                                        </div>
+                                        <div class="vote-count">{{ row.votes }} votes</div>
+                                        {% if loop.first and row.votes > 0 %}
+                                            <div class="winner-badge">
+                                                <i class="fas fa-crown"></i>
+                                                Élu
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>Aucun candidat pour ce poste.</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Membre{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const generateBtn = document.getElementById('generate-code-btn');
+            const votingCodeInput = document.getElementById('{{ form.votingCode.vars.id }}');
+
+            generateBtn.addEventListener('click', function () {
+                fetch('{{ path('app_member_generate_code') }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        votingCodeInput.value = data.code;
+                    })
+                    .catch(() => {
+                        alert('Erreur lors de la génération du code.');
+                    });
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="crud-prefix-container">
+        <h1 class="crud-prefix-title">Créer un Nouveau Membre</h1>
+        <br>
+        {{ include('member/_form.html.twig') }}
+        <br>
+        <div class="crud-prefix-btn-group">
+            <a href="{{ path('app_member_index') }}" class="crud-prefix-btn crud-prefix-btn-view" title="Retour à la liste">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+    </div>
+{% endblock %}

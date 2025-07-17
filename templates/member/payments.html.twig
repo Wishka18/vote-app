@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cotisations des Membres{% endblock %}
+
+
+{% block content %}
+<div class="payment-container" data-update-url="{{ path('update_dues_status') }}">
+    <h1>Cotisations des Membres</h1>
+
+    {% if members is empty %}
+        <div class="alert alert-info">
+            Aucun membre trouvé.
+        </div>
+    {% else %}
+        <table class="payment-table">
+            <thead>
+                <tr>
+                    <th></th> <!-- Pour l'icône d'édition -->
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Code de Vote</th>
+                    <th>Promotion</th>
+                    {% for year in years %}
+                        <th>Montant {{ year }}</th>
+                    {% endfor %}
+                    <th>Éligible au Vote</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in members %}
+                    <tr data-member-id="{{ member.id }}">
+                        <td>
+                            <i class="fas fa-edit edit-icon" title="Modifier"></i>
+                        </td>
+                        <td>{{ member.id }}</td>
+                        <td>{{ member.name }}</td>
+                        <td class="voting-code">{{ member.votingCode }}</td>
+                        <td>{{ member.promotionYear ?? 'N/A' }}</td>
+                        {% for year in years %}
+                            <td>
+                                <input type="number"
+                                       class="payment-input"
+                                       value="{{ member.getPaymentForYear(year) }}"
+                                       data-year="{{ year }}"
+                                       style="width: 80px;">
+                            </td>
+                        {% endfor %}
+                        <td>
+                            {% if member.duesPaid %}
+                                <span class="badge badge-success">Oui</span>
+                            {% else %}
+                                <span class="badge badge-danger">Non</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="action-buttons">
+            <button class="btn" id="save-changes">Enregistrer les Modifications</button>
+        </div>
+    {% endif %}
+
+    
+</div>
+{% endblock %}

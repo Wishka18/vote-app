@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'Utilisateur{% endblock %}
+
+{% block content %}
+<div class="crud-prefix-container">
+    <h1 class="crud-prefix-title">Détails de l'Utilisateur</h1>
+    <table class="crud-prefix-table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom d'utilisateur</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Rôles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="crud-prefix-btn-group">
+        <a href="{{ path('app_user_index') }}" class="crud-prefix-btn crud-prefix-btn-view" title="Retour à la liste">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="crud-prefix-btn crud-prefix-btn-edit" title="Modifier">
+            <i class="fas fa-edit"></i>
+        </a>
+        {{ include('user/_delete_form.html.twig', {'user': user}) }}
+
+    </div>
+</div>
+{% endblock %}

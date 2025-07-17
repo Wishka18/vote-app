@@ -1,0 +1,289 @@
+/* CRUD General Container */
+.crud-prefix-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: var(--bg-secondary);
+    box-shadow: var(--box-shadow);
+    border-radius: 8px;
+}
+
+/* Header */
+.crud-prefix-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
+    gap: 1rem;
+}
+
+.crud-prefix-title {
+    font-size: 1.8rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.crud-prefix-add-btn {
+    background-color: var(--accent-primary);
+    color: var(--white);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.crud-prefix-add-btn:hover {
+    background-color: var(--blue-600);
+}
+
+/* Table Styles */
+.crud-prefix-table {
+    width: 100%;
+    /* Make table full width */
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    /* Add horizontal scroll for small screens */
+    display: table;
+    /* FIXED: previously 'block' */
+}
+
+.crud-prefix-table th,
+.crud-prefix-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    word-wrap: break-word;
+    /* Prevent content overflow */
+}
+
+.crud-prefix-table th {
+    background-color: var(--table-th);
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.crud-prefix-table tr:nth-child(even) {
+    background-color: var(--table-th);
+}
+
+.crud-prefix-table td {
+    color: var(--text-primary);
+    max-width: 200px;
+    /* Prevent wide cells */
+}
+
+.crud-prefix-table td img {
+    max-width: 100px;
+    /* Limit image size */
+    height: auto;
+    display: block;
+}
+
+/* Action Buttons */
+.crud-prefix-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--white);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 0.3rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: var(--box-shadow);
+}
+
+.crud-prefix-btn:hover {
+    transform: scale(1.05);
+}
+
+/* View Button */
+.crud-prefix-btn-view {
+    background-color: var(--blue-500);
+}
+
+.crud-prefix-btn-view:hover {
+    background-color: var(--blue-600);
+}
+
+/* Edit Button */
+.crud-prefix-btn-edit {
+    background-color: var(--green-500);
+}
+
+.crud-prefix-btn-edit:hover {
+    background-color: var(--green-600);
+}
+
+/* Delete Button */
+.crud-prefix-btn-delete {
+    background-color: var(--gray-500);
+}
+
+.crud-prefix-btn-delete:hover {
+    background-color: #e11d48;
+    /* Vivid red on hover */
+}
+
+/* Button Group */
+.crud-prefix-btn-group {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    /* Allow wrap only on very small screens */
+    justify-content: flex-start;
+}
+
+/* Form */
+.crud-prefix-form-group {
+    margin-bottom: 1rem;
+}
+
+.crud-prefix-form-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    color: var(--text-secondary);
+}
+
+.crud-prefix-form-input,
+.crud-prefix-form-textarea,
+.crud-prefix-form-select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.2s ease;
+}
+
+.crud-prefix-form-input:focus,
+.crud-prefix-form-textarea:focus,
+.crud-prefix-form-select:focus {
+    border-color: var(--accent-primary);
+    outline: none;
+}
+
+.crud-prefix-form-submit {
+    background-color: var(--accent-primary);
+    color: var(--white);
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    /* Button full width on small screens */
+}
+
+.crud-prefix-form-submit:hover {
+    background-color: var(--blue-600);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .crud-prefix-title {
+        font-size: 1.5rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .crud-prefix-add-btn {
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .crud-prefix-btn-group {
+        flex-direction: column;
+        /* Stack buttons vertically on small screens */
+        align-items: stretch;
+    }
+
+    .crud-prefix-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .crud-prefix-table th,
+    .crud-prefix-table td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .crud-prefix-title {
+        font-size: 1.3rem;
+    }
+
+    .crud-prefix-add-btn {
+        font-size: 0.95rem;
+    }
+
+    .crud-prefix-btn {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+    }
+
+    .crud-prefix-table {
+        font-size: 0.85rem;
+    }
+}
+
+
+/* Toggle Switch */
+.crud-prefix-toggle {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.crud-prefix-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.crud-prefix-slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: var(--gray-500);
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+}
+
+.crud-prefix-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--white);
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.crud-prefix-toggle input:checked+.crud-prefix-slider {
+    background-color: var(--green-500);
+}
+
+.crud-prefix-toggle input:checked+.crud-prefix-slider:before {
+    transform: translateX(24px);
+}

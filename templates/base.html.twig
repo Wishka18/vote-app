@@ -1,0 +1,59 @@
+{% import "_layout.html.twig" as macros %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Election AMASEM
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+			<link rel="stylesheet" href="{{ asset('styles/dashboard.css') }}">
+			<link rel="stylesheet" href="{{ asset('styles/widgets_styling.css')}}">
+			<link rel="stylesheet" href="{{ asset('styles/voting.css') }}">
+			<link rel="stylesheet" href="{{ asset('styles/candidate.css') }}">
+			<link rel="stylesheet" href="{{ asset('styles/crud.css') }}">
+			<link rel="stylesheet" href="{{ asset('styles/member.css') }}">
+			<link rel="stylesheet" href="{{ asset('styles/login.css') }}">
+		{% endblock %}
+
+		{% block javascripts %}
+			<script src="{{ asset('scripts/sidebar.js') }}"></script>
+			<script src="{{ asset('scripts/voting.js') }}"></script>
+			<script src="{{ asset('scripts/candidate.js') }}"></script>
+			<script src="{{ asset('scripts/member.js') }}"></script>
+
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		{% block body %}{% endblock %}
+		<div class="app-container">
+			{{ macros.sidebar() }}
+
+			<div class="main-content">
+				{{ macros.header() }}
+
+				<div class="content-wrapper"> 
+					{% block content %}{% endblock %}
+				</div>
+
+				{# Floating Voter Button #}
+				<a href="{{ path('vote_home') }}" class="floating-voter-btn" title="Voter">
+					<i class="fas fa-vote-yea"></i>
+				</a>
+
+					{{ macros.footer() }}
+				</div>
+			</div>
+		</div>
+		</body>
+	</html>
+</body></html>

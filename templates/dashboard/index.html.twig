@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% import "_layout.html.twig" as macros %}
+{% import 'dashboard/_widgets.html.twig' as widgets %}
+
+
+{% block title %}payflex-hr Dashboard{% endblock %}
+
+{% block content %}
+
+   <div class="dashboard-grid">
+    {{ widgets.dashboard_card('Votes Total', 'fas fa-poll', total_votes, [
+        { label: 'Détails', route: null },
+        { label: 'Exporter', route: null }
+    ]) }}
+
+    {{ widgets.dashboard_card('Bureau de votes ouvert', 'fas fa-chart-line', open_stations, [
+        { label: 'Gérer', route: null },
+        { label: 'Nouveau', route: null }
+    ]) }}
+
+    {{ widgets.dashboard_card('Membres à jour', 'fas fa-users', total_members, [
+        { label: 'Voir', route: 'app_member_index' }
+    ]) }}
+
+    {{ widgets.dashboard_card('Bureau de votes', 'fas fa-vote-yea', total_stations, [
+        { label: 'Gérer', route: 'app_polling_station_index' },
+        { label: 'Nouveau', route: 'app_polling_station_new' }
+    ]) }}
+
+</div>
+{{ widgets.compact_results_card('Résultats live', live_leaders, 'vote_results') }}
+
+
+
+   
+{% endblock %}
+ 

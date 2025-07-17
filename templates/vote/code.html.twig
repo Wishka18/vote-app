@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entrer votre code de vote{% endblock %}
+
+{% block content %}
+<div class="vote-page-container">
+    <!-- Left: Code form -->
+    <div class="vote-code-card">
+        <h2>Entrer votre code de vote</h2>
+
+        {% if app.request.hasPreviousSession and app.session.flashBag.has('error') %}
+            <div class="error-message">
+                {% for message in app.flashes('error') %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST" class="vote-code-form">
+            <div class="form-group">
+                <label for="votingCode">Code unique</label>
+                <input type="text" id="votingCode" name="votingCode" placeholder="Saisissez votre code" required autocomplete="off">
+            </div>
+
+            <button type="submit" class="primary-btn">Accéder au vote</button>
+        </form>
+    </div>
+
+    <!-- Right: Voting info -->
+    <div class="vote-info-card">
+        <h3>Conditions pour voter</h3>
+        <p>Pour pouvoir participer au vote, vous devez :</p>
+        <ul>
+            <li>Avoir un code de vote valide</li>
+            <li>Être à jour sur vos cotisations</li>
+            <li>Ne pas avoir déjà voté pour tous les postes</li>
+        </ul>
+        <a href="{{ path('app_candidate_list') }}" class="primary-btn">Voir les candidats en liste</a>
+    </div>
+</div>
+{% endblock %}

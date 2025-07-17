@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats bientôt disponibles{% endblock %}
+
+{% block content %}
+<div class="coming-soon-container">
+    <div class="coming-soon-card">
+        <h1>⏳ Les résultats seront bientôt disponibles</h1>
+        <p>Merci de votre patience. Les résultats des élections seront publiés une fois validés.</p>
+        <a href="{{ path('vote_home') }}" class="back-home-btn">Retour</a>
+    </div>
+</div>
+{% endblock %}

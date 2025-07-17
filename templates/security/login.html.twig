@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% import '_layout.html.twig' as layout %}
+
+{% block title %}Connexion
+{% endblock %}
+
+{% block body %}
+	{{ layout.header() }}
+
+	<div class="login-container">
+		<div class="login-card">
+			<div class="login-header">
+				<h2>Connexion</h2>
+				<p class="login-subtitle">Accédez à l'administration</p>
+			</div>
+
+			{% if error %}
+				<div class="login-alert">
+					{{ error.messageKey|trans(error.messageData, 'security') }}
+				</div>
+			{% endif %}
+
+			<form method="post" class="login-form">
+				<div class="form-group">
+					<label for="inputUsername">Nom d'utilisateur</label>
+					<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="login-input" autocomplete="username" required autofocus>
+				</div>
+
+				<div class="form-group">
+					<label for="inputPassword">Mot de passe</label>
+					<input type="password" name="password" id="inputPassword" class="login-input" autocomplete="current-password" required>
+				</div>
+
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				<div class="form-remember">
+					<label>
+						<input type="checkbox" name="_remember_me">
+						Se souvenir de moi
+					</label>
+				</div>
+
+				<button class="login-btn" type="submit">
+					Se connecter
+				</button>
+			</form>
+
+			<div class="login-footer">
+				<a href="{{ path('vote_home') }}" class="back-to-site">← Retour au site</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les détails de l'Utilisateur{% endblock %}
+
+{% block content %}
+<div class="crud-prefix-container">
+    <h1 class="crud-prefix-title">Modifier les détails de l'Utilisateur</h1>
+    <br>
+    {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    <div class="crud-prefix-btn-group">
+        <a href="{{ path('app_user_index') }}" class="crud-prefix-btn crud-prefix-btn-view" title="Retour à la liste">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        {{ include('user/_delete_form.html.twig', {'user': user}) }}
+
+    </div>
+</div>
+{% endblock %}

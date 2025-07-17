@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vote for Candidates{% endblock %}
+
+{% block content %}
+<div class="candidate-page">
+    <!-- Desktop View -->
+    <div class="candidate-desktop">
+        <div class="candidate-sidebar">
+            <h2>Positions</h2>
+            <ul class="candidate-tabs">
+                {% set uniquePositions = [] %}
+                {% for candidate in candidates %}
+                    {% if candidate.position.value not in uniquePositions %}
+                        {% set uniquePositions = uniquePositions|merge([candidate.position.value]) %}
+                    {% endif %}
+                {% endfor %}
+                {% for position in uniquePositions %}
+                    <li class="candidate-tab" data-position="{{ position }}">
+                        {{ position }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="candidate-main">
+            <div class="candidate-grid" id="candidateGrid">
+                {% for candidate in candidates %}
+                    <div class="candidate-card" data-position="{{ candidate.position.value }}">
+                        <div class="candidate-photo-list">
+                            <img src="{{ asset('uploads/photos/' ~ candidate.photo) }}" alt="{{ candidate.name }}">
+                        </div>
+
+                        <div class="candidate-info">
+                            <h3>{{ candidate.name }}</h3>
+                            <p class="candidate-position">{{ candidate.position.value }}</p>
+                            <p class="candidate-description">{{ candidate.description }}</p>
+                            <a href="{{ path('app_candidate_show', {'id': candidate.id}) }}" class="candidate-vote-btn">
+                                Lire plus
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="candidate-no-candidates">No candidates available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile View -->
+    <div class="candidate-mobile">
+        <div class="candidate-position-dropdown">
+            <select id="positionDropdown">
+                {% set uniquePositions = [] %}
+                {% for candidate in candidates %}
+                    {% if candidate.position.value not in uniquePositions %}
+                        <option value="{{ candidate.position.value }}">
+                            {{ candidate.position.value }}
+                        </option>
+                        {% set uniquePositions = uniquePositions|merge([candidate.position.value]) %}
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="candidate-grid" id="candidateGridMobile">
+            {% for candidate in candidates %}
+                <div class="candidate-card" data-position="{{ candidate.position.value }}">
+                    <div class="candidate-photo-list">
+                        <img src="{{ asset('uploads/photos/' ~ candidate.photo) }}" alt="{{ candidate.name }}">
+                    </div>
+
+                    <div class="candidate-info">
+                        <h3>{{ candidate.name }}</h3>
+                        <p class="candidate-position">{{ candidate.position.value }}</p>
+                        <p class="candidate-description">{{ candidate.description }}</p>
+                        <a href="{{ path('app_candidate_show', {'id': candidate.id}) }}" class="candidate-vote-btn">
+                            <i class="fas fa-eye"></i>
+                            Lire plus
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <p class="candidate-no-candidates">No candidates available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

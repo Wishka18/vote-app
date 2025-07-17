@@ -1,0 +1,115 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-primary);
+  padding: 20px;
+}
+
+.login-card {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  padding: 30px 25px;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.login-header {
+  margin-bottom: 20px;
+}
+
+.login-logo {
+  max-width: 80px;
+  margin-bottom: 10px;
+}
+
+.login-header h2 {
+  font-size: 1.8rem;
+  color: var(--accent-primary);
+  margin-bottom: 5px;
+}
+
+.login-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.login-alert {
+  background-color: var(--red-100, #fee2e2);
+  color: var(--red-700, #b91c1c);
+  border: 1px solid var(--red-200, #fecaca);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.login-form .form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.login-form label {
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+  display: block;
+  color: var(--text-secondary);
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--gray-50);
+  color: var(--gray-900);
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--blue-100);
+  outline: none;
+}
+
+.form-remember {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  background-color: var(--accent-primary);
+  color: var(--white);
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+  background-color: var(--blue-600);
+}
+
+.login-footer {
+  margin-top: 15px;
+}
+
+.back-to-site {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.back-to-site:hover {
+  text-decoration: underline;
+}

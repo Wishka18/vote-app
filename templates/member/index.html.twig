@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Membres
+{% endblock %}
+
+{% block content %}
+	<div class="crud-prefix-container">
+		<div class="crud-prefix-header">
+			<h1 class="crud-prefix-title">Gestion des Membres</h1>
+
+			<div class="menu-icon-btn-group">
+				<a href="{{ path('app_member_new') }}" class="menu-icon-btn menu-icon-btn-view" title="Ajouter un membre">
+					<i class="fas fa-user-plus"></i>
+				</a>
+				<a href="{{ path('member_payments') }}" class="menu-icon-btn menu-icon-btn-edit" title="Cotisations">
+					<i class="fas fa-coins"></i>
+				</a>
+				<button id="generate-all-codes" data-url="{{ path('app_member_generate_codes') }}" class="menu-icon-btn menu-icon-btn-delete" title="Générer les codes de vote">
+					<i class="fas fa-key"></i>
+				</button>
+			</div>
+		</div>
+
+		<table class="crud-prefix-table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nom</th>
+					<th>Email</th>
+					<th>Cotisation à Jour</th>
+					<th>Code de Vote</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for member in members %}
+					<tr>
+						<td>{{ member.id }}</td>
+						<td>{{ member.name }}</td>
+						<td>{{ member.email }}</td>
+						<td>
+							<form method="post" action="{{ path('app_member_toggle_dues', {'id': member.id}) }}">
+								<label class="crud-prefix-toggle">
+									<input type="checkbox" name="duesPaid" onchange="this.form.submit()" {{ member.duesPaid ? 'checked' : '' }}>
+									<span class="crud-prefix-slider"></span>
+								</label>
+							</form>
+						</td>
+
+						<td>{{ member.votingCode }}</td>
+						<td>
+							<div class="crud-prefix-btn-group">
+								<a href="{{ path('app_member_show', {'id': member.id}) }}" class="crud-prefix-btn crud-prefix-btn-view" title="Voir">
+									<i class="fas fa-eye"></i>
+								</a>
+								<a href="{{ path('app_member_edit', {'id': member.id}) }}" class="crud-prefix-btn crud-prefix-btn-edit" title="Modifier">
+									<i class="fas fa-edit"></i>
+								</a>
+								<button class="crud-prefix-btn crud-prefix-btn-delete" title="Supprimer" onclick="confirmDelete('{{ path('app_member_delete', {'id': member.id}) }}')">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+							</div>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="7">Aucun enregistrement trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
+

@@ -1,0 +1,12 @@
+<h2>Bonjour {{ member.name }} !</h2>
+<p>Veuillez choisir un candidat pour chaque poste :</p>
+
+{{ form_start(form) }}
+    {% for field in form %}
+        <div class="my-3">
+            <h4>{{ field.vars.label }}</h4>
+            {{ form_widget(field) }}
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-success">Soumettre mon vote</button>
+{{ form_end(form) }}

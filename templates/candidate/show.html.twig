@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{{ candidate.name }}
+	- Détails
+{% endblock %}
+
+{% block content %}
+	<div class="candidate-detail-page">
+		<div class="candidate-detail-card">
+			<div class="candidate-photo-container">
+				<img src="{{ asset('uploads/photos/' ~ candidate.photo) }}" alt="{{ candidate.name }}" class="candidate-photo-show">
+
+			</div>
+
+			<div class="candidate-info-container">
+				<h2 class="candidate-name">{{ candidate.name }}</h2>
+				<p class="candidate-position">{{ candidate.position.value }}</p>
+
+				{% if candidate.description %}
+					<div class="candidate-description">
+						<p>{{ candidate.description }}</p>
+					</div>
+				{% else %}
+					<div class="candidate-description">
+						<p>
+							<em>Aucune description fournie pour ce candidat.</em>
+						</p>
+					</div>
+				{% endif %}
+
+				<div class="back-btn-container">
+					<a href="{{ path('app_candidate_list') }}" class="back-btn">
+						<i class="fas fa-arrow-left"></i>
+						Retour à la liste
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

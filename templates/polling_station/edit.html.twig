@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le Bureau de Vote{% endblock %}
+
+{% block content %}
+<div class="crud-prefix-container">
+    <h1 class="crud-prefix-title">Modifier le Bureau de Vote</h1>
+    <br>
+    {{ include('polling_station/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    <div class="crud-prefix-btn-group">
+        <a href="{{ path('app_polling_station_index') }}" class="crud-prefix-btn crud-prefix-btn-view" title="Retour à la liste">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        {{ include('polling_station/_delete_form.html.twig', {'polling_station': polling_station}) }}
+    </div>
+</div>
+{% endblock %}

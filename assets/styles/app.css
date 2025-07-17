@@ -1,0 +1,125 @@
+:root {
+  /* Neutral Color Palette */
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Grayscale */
+  --gray-50: #f9fafb;
+  /* Lightest gray */
+  --gray-100: #f3f4f6;
+  /* Light gray */
+  --gray-200: #e5e7eb;
+  /* Light-medium gray */
+  --gray-300: #d1d5db;
+  /* Medium gray */
+  --gray-400: #9ca3af;
+  /* Medium-dark gray */
+  --gray-500: #6b7280;
+  /* Dark gray */
+  --gray-600: #4b5563;
+  /* Darker gray */
+  --gray-700: #374151;
+  /* Very dark gray */
+  --gray-800: #1f2937;
+  /* Almost black gray */
+  --gray-900: #111827;
+  /* Darkest gray */
+
+  /* Blue Color Palette */
+  --blue-50: #eff6ff;
+  /* Very light blue */
+  --blue-100: #dbeafe;
+  /* Light blue */
+  --blue-200: #bfdbfe;
+  /* Soft blue */
+  --blue-300: #93c5fd;
+  /* Lighter vibrant blue */
+  --blue-400: #60a5fa;
+  /* Light vibrant blue */
+  --blue-500: #3b82f6;
+  /* Vibrant blue */
+  --blue-600: #2563eb;
+  /* Deep blue */
+  --blue-700: #1d4ed8;
+  /* Dark blue */
+
+  /* Green Color Palette */
+  --green-50: #f0fdf4;
+  /* Very light green */
+  --green-100: #dcfce7;
+  /* Light green */
+  --green-200: #bbf7d0;
+  /* Soft green */
+  --green-300: #86efac;
+  /* Mint green */
+  --green-400: #4ade80;
+  /* Bright green */
+  --green-500: #22c55e;
+  /* Vibrant green */
+  --green-600: #16a34a;
+  /* Deep green */
+  --green-700: #15803d;
+  /* Dark green */
+
+  /* Accent Colors */
+  --accent-primary: var(--blue-500);
+  --accent-secondary: var(--green-500);
+
+  /* Light Mode Colors */
+  --bg-primary: var(--gray-50);
+  --bg-secondary: var(--white);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --border-color: var(--gray-200);
+  --hover-bg: var(--blue-100);
+  --hover-accent: var(--green-100);
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --card-primary: var(--gray-50);
+  --table-th: var(--gray-100);
+
+  /* Dark Mode Colors */
+  --dark-bg-primary: var(--gray-900);
+  --dark-bg-secondary: var(--gray-800);
+  --dark-text-primary: var(--white);
+  --dark-text-secondary: var(--gray-300);
+  --dark-border-color: var(--gray-700);
+  --dark-hover-bg: var(--gray-700);
+  --dark-hover-accent: var(--green-700);
+  --dark-box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06);
+  --dark-card-primary:var(--gray-600);
+  --dark-table-th: var(--gray-600);
+}
+
+/* Dark Mode */
+.dark-theme {
+  --bg-primary: var(--dark-bg-primary);
+  --bg-secondary: var(--dark-bg-secondary);
+  --text-primary: var(--dark-text-primary);
+  --text-secondary: var(--dark-text-secondary);
+  --border-color: var(--dark-border-color);
+  --hover-bg: var(--dark-hover-bg);
+  --hover-accent: var(--dark-hover-accent);
+  --box-shadow: var(--dark-box-shadow);
+  --card-primary: var(--dark-card-primary);
+  --table-th: var(--dark-table-th);
+}
+
+/* Global Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Resets and Base Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+  
+}
+
+html, body {
+  overflow-x: hidden;
+}

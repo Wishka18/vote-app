@@ -1,0 +1,10 @@
+{{ form_start(form, {'attr': {'class': 'crud-prefix-form'}}) }}
+    {% for field in form %}
+        <div class="crud-prefix-form-group">
+            {{ form_label(field, null, {'label_attr': {'class': 'crud-prefix-form-label'}}) }}
+            {{ form_widget(field, {'attr': {'class': 'crud-prefix-form-input'}}) }}
+            {{ form_errors(field) }}
+        </div>
+    {% endfor %}
+    <button class="crud-prefix-form-submit">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}

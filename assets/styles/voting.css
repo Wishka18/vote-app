@@ -1,0 +1,643 @@
+/*Vote/home*/
+
+.voting-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.polling-stations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .polling-stations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .polling-stations-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.polling-station-card {
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.polling-station-card.open {
+ background-color: var(--blue-200);
+  border: 1px solid var(--blue-600);
+}
+
+.polling-station-card.closed {
+  background-color: var(--bg-secondary);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.card-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.voting-icon-container {
+  background-color: var(--blue-600);
+  /* Static blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voting-icon {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.card-content {
+  padding: 0 1rem 1rem;
+}
+
+.position-title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #1F2937;
+  /* Static dark gray for text */
+}
+
+.station-info {
+  margin-bottom: 1rem;
+}
+
+.station-info p {
+  display: flex;
+  align-items: center;
+  color: #4B5563;
+  /* Static gray for secondary text */
+  line-height: 1.6;
+}
+
+.station-info i {
+  margin-right: 0.75rem;
+  min-width: 20px;
+  text-align: center;
+  color: #2563EB;
+  /* Static blue for icons */
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vote-btn,
+.results-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  gap: 0.5rem;
+}
+
+.vote-btn {
+  background-color: var(--blue-600);
+  /* Static blue */
+  color: white;
+}
+
+.results-btn {
+  background-color: #F3F4F6;
+  /* Static light gray */
+  color: #4B5563;
+  /* Static gray */
+}
+
+.vote-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  line-height: 1.6;
+  color: #4B5563;
+  /* Static gray */
+}
+
+.vote-status.voted {
+  background-color: var(--blue-200);;
+  /* Static light blue */
+  color: var(--blue-600);
+  /* Static blue */
+}
+
+.vote-status.closed {
+  background-color: var(--gray-200);
+
+  color: var(--gray-500);
+ 
+}
+
+.vote-status i,
+.vote-btn i,
+.results-btn i {
+  margin-right: 0.5rem;
+}
+
+.logout-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.logout-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--gray-200);
+  /* Static light gray */
+  color: var(--gray-600);
+  /* Static gray */
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: var(--gray-300)
+}
+
+.logout-btn i {
+  margin-right: 0.5rem;
+}
+
+/* =============================
+   Vote code entry Page Styles
+   ============================= */
+
+
+.vote-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 50px;
+  flex-wrap: wrap; /* Allows stacking on small screens */
+}
+
+.vote-code-card,
+.vote-info-card {
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  padding: 30px;
+  width: 100%;
+}
+
+.vote-code-card {
+  max-width: 400px;
+  flex: 1;
+}
+
+.vote-info-card {
+  max-width: 800px;
+  flex: 2;
+}
+
+.vote-code-card h2,
+.vote-info-card h3 {
+  color: var(--gray-800);
+  margin-bottom: 20px;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #d32f2f;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.vote-code-form .form-group {
+  margin-bottom: 20px;
+}
+
+.vote-code-form label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  color: var(--gray-700);
+}
+
+.vote-code-form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  transition: border-color 0.3s ease;
+}
+
+.vote-code-form input:focus {
+  outline: none;
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.vote-info-card p,
+.vote-info-card ul {
+  color: var(--gray-700);
+}
+
+.vote-info-card ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.primary-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background-color: var(--blue-600);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.primary-btn:hover {
+  background-color: var(--blue-400);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .vote-page-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .vote-code-card,
+  .vote-info-card {
+    max-width: 100%;
+  }
+
+  .primary-btn {
+    width: 100%;
+  }
+}
+
+
+
+
+/* ------------------------
+   Results Page
+------------------------ */
+.results-page {
+  width: 100%;
+  background-color: var(--bg-primary);
+}
+
+.results-page h2 {
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+/* DESKTOP */
+.results-desktop {
+  display: flex;
+}
+
+.results-sidebar {
+  width: 250px;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  padding: 1rem;
+}
+
+.results-sidebar ul {
+  list-style: none;
+  padding: 12px;
+  margin: 0;
+}
+
+.results-sidebar .position-tab {
+  cursor: pointer;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  background-color: var(--hover-bg);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+
+
+.results-sidebar .position-tab.active {
+  background-color: var(--accent-primary);
+  color: var(--white);
+}
+
+
+.position-results {
+  width: 75%;
+  padding: 1rem;
+}
+
+.results-page .candidates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.results-page .candidate-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--bg-secondary);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+}
+
+.results-page .candidate-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--blue-200);
+}
+
+.results-page .candidate-info {
+  flex-grow: 1;
+}
+
+.results-page .candidate-name {
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.results-page .progress-bar-container {
+  background-color: var(--gray-200);
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.results-page .progress-bar {
+  background-color: var(--blue-600);
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.results-page .percentage {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.results-page .vote-count {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.results-page .winner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--blue-100);
+  color: var(--blue-600);
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.results-page .winner-badge i {
+  color: gold;
+}
+
+/* MOBILE */
+.results-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .results-desktop {
+    display: none;
+  }
+
+  .results-mobile {
+    display: block;
+    padding: 1rem;
+  }
+
+  .position-dropdown {
+    margin-bottom: 1rem;
+  }
+
+  #resultPositionDropdown {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  .results-page .candidates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+/* =============================
+   Position Page Scoped Styles
+   ============================= */
+.coming-soon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    background-color: var(--bg-secondary);
+}
+
+.coming-soon-card {
+    background: var(--card-primary);
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    max-width: 500px;
+}
+
+.coming-soon-card h1 {
+    color: var(--blue-600);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.coming-soon-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.back-home-btn {
+    display: inline-block;
+    background: var(--blue-500);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.back-home-btn:hover {
+    background: var(--blue-600);
+}
+
+
+
+/* =============================
+   Position Page Scoped Styles
+   ============================= */
+
+/* Vote Position Page Styles */
+.position-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+}
+
+.position-title {
+  text-align: center;
+  color: var(--gray-900);
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.position-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.position-candidates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.position-candidate-card {
+  display: block;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.position-candidate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.position-radio {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.position-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.position-photo-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--blue-200);
+  margin-bottom: 1rem;
+}
+
+.position-candidate-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.position-candidate-name {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.position-candidate-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.position-submit-container {
+  text-align: center;
+}
+
+.position-submit-btn {
+  background-color: var(--accent-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.position-submit-btn:hover {
+  background-color: var(--blue-600);
+}
+
+/* Responsive: stack cards vertically on small screens */
+@media (max-width: 768px) {
+  .position-candidates-grid {
+    grid-template-columns: 1fr;
+  }
+}

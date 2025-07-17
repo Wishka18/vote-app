@@ -1,0 +1,125 @@
+{# _layout.html.twig #}
+{% macro sidebar() %}
+	<div class="sidebar">
+		<div class="sidebar-logo sidebar-toggle">
+			<img src="{{ asset('uploads/photos/LOGO AMASEM.png') }}" alt="Logo" class="logo">
+		</div>
+		<nav>
+			<ul class="sidebar-menu">
+
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="menu-item">
+						<a href="{{ path('dashboard') }}" class="sidebar-link">
+							<i class="fas fa-home"></i>
+							<span>Tableau de bord</span>
+						</a>
+					</li>
+				
+
+					<li class="menu-item has-submenu">
+						<a href="{{ path('app_user_index') }}" class="sidebar-link">
+							<i class="fas fa-users"></i>
+							<span>Utilisateurs</span>
+						</a>
+						{# <ul class="submenu">
+												                        <a href="{{ path('app_user_new') }}">Nouveau</a>
+												                    </ul> #}
+					</li>
+
+					<li class="menu-item has-submenu">
+						<a href="{{ path('app_member_index') }}" class="sidebar-link">
+							<i class="fas fa-user-friends"></i>
+							<span>Membres</span>
+						</a>
+						{# <ul class="submenu">
+												                        <a href="{{ path('app_member_new') }}">Nouveau</a>
+												                    </ul> #}
+					</li>
+
+					<li class="menu-item has-submenu">
+						<a href="{{ path('app_candidate_index') }}" class="sidebar-link">
+							<i class="fas fa-user-tie"></i>
+							<span>Candidats</span>
+						</a>
+						{# <ul class="submenu">
+												                        <a href="{{ path('app_candidate_new') }}">Nouveau</a>
+												                    </ul> #}
+					</li>
+
+					<li class="menu-item has-submenu">
+						<a href="{{ path('app_polling_station_index') }}" class="sidebar-link">
+							<i class="fas fa-vote-yea"></i>
+							<span>Stations de votes</span>
+						</a>
+						{# <ul class="submenu">
+												                        <a href="{{ path('app_polling_station_new') }}">Nouveau</a>
+												                    </ul> #}
+					</li>
+				{% endif %}
+
+				<li class="menu-item">
+					<a href="{{ path('vote_home') }}" class="sidebar-link" title="Voter">
+						<i class="fas fa-poll"></i>
+						<span>Votes</span>
+					</a>
+				</li>
+
+				<li class="menu-item logout-item">
+					<a href="{{ path('vote_logout') }}" class="sidebar-link" title="Changer de votant">
+						<i class="fas fa-sign-out-alt"></i>
+						<span>Changer de votant</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+{% endmacro %}
+
+{% macro header() %}
+	<div class="header">
+		<div
+			class="header-left">
+
+			{# Mobile Sidebar Toggle Button #}
+			<button id="mobile-sidebar-toggle" class="mobile-sidebar-btn" aria-label="Toggle Sidebar">
+				<i class="fas fa-bars"></i>
+			</button>
+
+			<div class="user-profile">
+				<img src="{{ asset('uploads/photos/user1.png') }}" alt="Profile">
+				<span>{{ app.user ? app.user.username : 'Invité' }}</span>
+			</div>
+
+			<h2 class="page-title">
+				{% block page_title %}Election AMASEM
+				{% endblock %}
+			</h2>
+		</div>
+
+		<div class="header-content">
+			<div class="header-theme-toggle">
+				<div class="theme-toggle">
+					<input type="checkbox" id="theme-switch" class="theme-toggle-input">
+					<label for="theme-switch" class="theme-toggle-label"></label>
+				</div>
+			</div>
+			{% if app.user %}
+				<a href="{{ path('app_logout') }}" class="logout-item">
+					<i class="fas fa-sign-out-alt"></i>
+				</a>
+			{% else %}
+				<a href="{{ path('app_login') }}" class="login-item">
+					<i class="fas fa-sign-in"></i>
+				</a>
+			{% endif %}
+		</div>
+	</div>
+{% endmacro %}
+
+{% macro footer() %}
+	<div class="footer">
+		©
+		{{ "now"|date("Y") }}
+		Elections AMASEM | IBS Mali Tous droits réservés.
+	</div>
+{% endmacro %}

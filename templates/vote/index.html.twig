@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="voting-container">
+    <h2>Bienvenu {{member.name}}</h2>
+    <br>
+  {% if stationStats is empty %}
+      <p class="no-stations">Aucun bureau de vote n'est disponible.</p>
+  {% else %}
+      <div class="polling-stations-grid">
+          {% for stationInfo in stationStats %}
+            {% set station = stationInfo.station %}
+              <div class="polling-station-card {{ station.isOpen ? 'open' : 'closed' }}">
+                  <div class="card-header">
+                      <div class="voting-icon-container">
+                          <i class="fas fa-vote-yea voting-icon"></i>
+                      </div>
+                  </div>
+                  
+                  <div class="card-content">
+                      <h3 class="position-title">{{ station.position.value }}</h3>
+                      
+                      <div class="station-info">
+                          <p><i class="fas fa-users"></i> {{ stationInfo.candidates }} candidat(s)</p>
+                          <p><i class="fas fa-check-circle"></i> {{ stationInfo.votes }} membre(s) ont voté</p>
+                      </div>
+                      
+                      <div class="card-actions">
+                          {% if station.isOpen %}
+                              {% if station.position in votedPositions %}
+                                  <span class="vote-status voted"><i class="fas fa-check"></i> Vote effectué</span>
+                              {% else %}
+                                  <a href="{{ path('vote_position', { position: station.position.value, code: code }) }}" class="vote-btn">
+                                      <i class="fas fa-check"></i> Voter
+                                  </a>
+                              {% endif %}
+                          {% else %}
+                              <span class="vote-status closed"><i class="fas fa-lock"></i> Bureau fermé</span>
+                          {% endif %}
+                          
+                          <!-- Résultats Button -->
+                        <a href="{{ path('vote_results') }}#{{ station.positionSlug }}" class="results-btn">
+                            <i class="fas fa-chart-bar"></i> Résultats
+                        </a>
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+</div>
+
+<div class="logout-container">
+  <a href="{{ path('vote_logout') }}" class="logout-btn">
+      <i class="fas fa-sign-out-alt"></i> Changer de votant
+  </a>
+</div>
+{% endblock %}

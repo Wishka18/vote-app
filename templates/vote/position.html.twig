@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vote pour le poste : {{ position.value }}{% endblock %}
+
+{% block content %}
+<div class="position-page">
+    <h2 class="position-title">Vote pour le poste : {{ position.value }}</h2>
+
+    <form method="post" class="position-form">
+        <div class="position-candidates-grid">
+            {% for candidate in candidates %}
+                <label class="position-candidate-card">
+                    <input type="radio" name="candidate" value="{{ candidate.id }}" class="position-radio" required>
+                    <div class="position-card-content">
+                        <div class="position-photo-container">
+                            <img src="{{ asset('uploads/photos/' ~ candidate.photo) }}"
+                                 alt="{{ candidate.name }}"
+                                 class="position-candidate-photo">
+                        </div>
+                        <div class="position-candidate-info">
+                            <strong class="position-candidate-name">{{ candidate.name }}</strong>
+                            <p class="position-candidate-description">{{ candidate.description }}</p>
+                        </div>
+                    </div>
+                </label>
+            {% endfor %}
+        </div>
+
+        <div class="position-submit-container">
+            <button type="submit" class="position-submit-btn">
+                <i class="fas fa-paper-plane"></i> Soumettre mon vote
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

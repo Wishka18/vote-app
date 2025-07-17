@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Candidats{% endblock %}
+
+{% block content %}
+    <div class="crud-prefix-container">
+        <div class="crud-prefix-header">
+            <h1 class="crud-prefix-title">Gestion des Candidats</h1>
+            <a href="{{ path('app_candidate_new') }}" class="crud-prefix-add-btn">+ Ajouter un candidat</a>
+        </div>
+
+        <table class="crud-prefix-table">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Poste</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidate in candidates %}
+                    <tr>
+                        <td>
+                            {% if candidate.photo %}
+                                <img src="{{ asset('uploads/photos/' ~ candidate.photo) }}" alt="{{ candidate.name }}" />
+                            {% else %}
+                                Pas de photo
+                            {% endif %}
+                        </td>
+                        <td>{{ candidate.name }}</td>
+                        <td>{{ candidate.description }}</td>
+                        <td>{{ candidate.position.value }}</td>
+                        <td>
+                            <div class="crud-prefix-btn-group">
+                                <a href="{{ path('app_candidate_show', {'id': candidate.id}) }}" class="crud-prefix-btn crud-prefix-btn-view" title="Voir">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ path('app_candidate_edit', {'id': candidate.id}) }}" class="crud-prefix-btn crud-prefix-btn-edit" title="Modifier">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="crud-prefix-btn crud-prefix-btn-delete" title="Supprimer" onclick="confirmDelete('{{ path('app_candidate_delete', {'id': candidate.id}) }}')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Aucun enregistrement trouvé</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
